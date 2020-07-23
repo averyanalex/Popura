@@ -77,6 +77,12 @@ if ! getent group yggdrasil 2>&1 > /dev/null; then
   groupadd --system --force yggdrasil || echo "Failed to create group 'yggdrasil' - please create it manually and reinstall"
 fi
 
+if [ `sysctl -n net.ipv6.conf.all.forwarding` -eq 0 ]; then
+  sed -i '/net.ipv6.conf.all.forwarding/d' /etc/sysctl.conf
+  echo "net.ipv6.conf.all.forwarding=1" | tee -a /etc/sysctl.conf
+  sysctl -w net.ipv6.conf.all.forwarding=1
+fi
+
 if [ -f /etc/yggdrasil.conf ];
 then
   mkdir -p /var/backups

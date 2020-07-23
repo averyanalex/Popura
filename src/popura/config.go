@@ -38,7 +38,7 @@ func GenerateConfig() (*config.NodeConfig, *PopuraConfig) {
 	popConfig.Meshname.Listen = "[::1]:53535"
 	popConfig.Meshname.Config = map[string][]string{}
 
-	popConfig.RAdv.Enable = false
+	popConfig.RAdv.Enable = true
 	popConfig.RAdv.Interface = "eth0"
 	popConfig.RAdv.SetGatewayIP = true
 
